@@ -4,6 +4,7 @@
  */
 package view;
 
+import controller.Pagos.CtrPagos;
 import controller.Telecomunicaciones.CtrTelecomunicaciones;
 import controller.Usuarios.CtrUsuario;
 import java.awt.CardLayout;
@@ -14,6 +15,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import model.PagoDb;
 
 /**
  *
@@ -21,7 +23,8 @@ import javax.swing.JOptionPane;
  */
 public class FrmMenuBar extends javax.swing.JFrame {
 
-     private CardLayout cardLayout;  // Declaración a nivel de clase
+     private CardLayout cardLayout;
+     private PagoDb pagodb;// Declaración a nivel de clase
 
     public FrmMenuBar() {
         initComponents();
@@ -32,6 +35,7 @@ public class FrmMenuBar extends javax.swing.JFrame {
         cardLayout = (CardLayout) PanelPrincipal.getLayout();
         new CtrUsuario(this);
         new CtrTelecomunicaciones(this);
+        new CtrPagos(this,pagodb);
     }
 
     private void inicializacionItemsMenuBar() {
@@ -270,9 +274,41 @@ public class FrmMenuBar extends javax.swing.JFrame {
         PanelEliminarT = new javax.swing.JPanel();
         PanelPagos = new javax.swing.JPanel();
         PanelGuardarP = new javax.swing.JPanel();
+        txtCedulaPG = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtMontoPG = new javax.swing.JTextField();
+        txtFechaPG = new javax.swing.JTextField();
+        comboTipoPG = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtDescripcionPG = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        buttonCrearPG = new javax.swing.JToggleButton();
         PanelBuscarP = new javax.swing.JPanel();
+        txtBuscarP = new javax.swing.JTextField();
+        buttonBuscarP = new javax.swing.JToggleButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaP = new javax.swing.JTable();
         PanelModificarP = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        txtCedulaPM = new javax.swing.JTextField();
+        txtMontoPM = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtFechaPM = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        comboTipoPM = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        txtDescripcionPM = new javax.swing.JTextField();
+        buttonModifiarP = new javax.swing.JToggleButton();
+        jLabel15 = new javax.swing.JLabel();
+        txtIdPM = new javax.swing.JTextField();
+        buttonBuscarPM = new javax.swing.JToggleButton();
         PanelEliminarP = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        txtIdPE = new javax.swing.JTextField();
+        buttonBuscarPE = new javax.swing.JToggleButton();
         PanelInmuebles = new javax.swing.JPanel();
         PanelGuardarI = new javax.swing.JPanel();
         PanelBuscarI = new javax.swing.JPanel();
@@ -355,9 +391,154 @@ public class FrmMenuBar extends javax.swing.JFrame {
         PanelPrincipal.add(PanelModificarT, "card10");
         PanelPrincipal.add(PanelEliminarT, "card11");
         PanelPrincipal.add(PanelPagos, "card12");
+
+        PanelGuardarP.setLayout(null);
+        PanelGuardarP.add(txtCedulaPG);
+        txtCedulaPG.setBounds(340, 70, 430, 22);
+
+        jLabel5.setText("Cedula");
+        PanelGuardarP.add(jLabel5);
+        jLabel5.setBounds(270, 70, 60, 30);
+        PanelGuardarP.add(txtMontoPG);
+        txtMontoPG.setBounds(350, 120, 110, 22);
+
+        txtFechaPG.setText("AAAA-MM-DD");
+        PanelGuardarP.add(txtFechaPG);
+        txtFechaPG.setBounds(350, 170, 100, 22);
+
+        comboTipoPG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pago", "multa" }));
+        PanelGuardarP.add(comboTipoPG);
+        comboTipoPG.setBounds(350, 210, 72, 22);
+
+        jLabel6.setText("Monto");
+        PanelGuardarP.add(jLabel6);
+        jLabel6.setBounds(270, 120, 60, 16);
+
+        jLabel7.setText("Fecha");
+        PanelGuardarP.add(jLabel7);
+        jLabel7.setBounds(270, 170, 60, 16);
+
+        jLabel8.setText("Tipo");
+        PanelGuardarP.add(jLabel8);
+        jLabel8.setBounds(270, 210, 50, 16);
+
+        txtDescripcionPG.setText("Ingrese la descripcion");
+        PanelGuardarP.add(txtDescripcionPG);
+        txtDescripcionPG.setBounds(340, 260, 440, 90);
+
+        jLabel9.setText("Descripcion");
+        PanelGuardarP.add(jLabel9);
+        jLabel9.setBounds(260, 290, 70, 16);
+
+        buttonCrearPG.setText("Crear pago");
+        PanelGuardarP.add(buttonCrearPG);
+        buttonCrearPG.setBounds(440, 410, 200, 23);
+
         PanelPrincipal.add(PanelGuardarP, "card13");
+
+        PanelBuscarP.setLayout(null);
+
+        txtBuscarP.setText("Ingrese un numero de cedula");
+        PanelBuscarP.add(txtBuscarP);
+        txtBuscarP.setBounds(270, 50, 290, 22);
+
+        buttonBuscarP.setText("Buscar");
+        PanelBuscarP.add(buttonBuscarP);
+        buttonBuscarP.setBounds(140, 50, 120, 23);
+
+        tablaP.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaP);
+
+        PanelBuscarP.add(jScrollPane1);
+        jScrollPane1.setBounds(120, 80, 1040, 402);
+
         PanelPrincipal.add(PanelBuscarP, "card14");
+
+        PanelModificarP.setLayout(null);
+
+        jLabel10.setText("Cedula");
+        PanelModificarP.add(jLabel10);
+        jLabel10.setBounds(270, 70, 60, 30);
+        PanelModificarP.add(txtCedulaPM);
+        txtCedulaPM.setBounds(340, 70, 430, 22);
+        PanelModificarP.add(txtMontoPM);
+        txtMontoPM.setBounds(350, 120, 110, 22);
+
+        jLabel11.setText("Monto");
+        PanelModificarP.add(jLabel11);
+        jLabel11.setBounds(270, 120, 60, 16);
+
+        jLabel12.setText("Fecha");
+        PanelModificarP.add(jLabel12);
+        jLabel12.setBounds(270, 170, 60, 16);
+
+        txtFechaPM.setText("AAAA-MM-DD");
+        PanelModificarP.add(txtFechaPM);
+        txtFechaPM.setBounds(350, 170, 100, 22);
+
+        jLabel13.setText("Tipo");
+        PanelModificarP.add(jLabel13);
+        jLabel13.setBounds(270, 210, 50, 16);
+
+        comboTipoPM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pago", "multa" }));
+        PanelModificarP.add(comboTipoPM);
+        comboTipoPM.setBounds(350, 210, 72, 22);
+
+        jLabel14.setText("Descripcion");
+        PanelModificarP.add(jLabel14);
+        jLabel14.setBounds(260, 290, 70, 16);
+
+        txtDescripcionPM.setText("Ingrese la descripcion");
+        PanelModificarP.add(txtDescripcionPM);
+        txtDescripcionPM.setBounds(340, 260, 440, 90);
+
+        buttonModifiarP.setText("Guardar cambios");
+        PanelModificarP.add(buttonModifiarP);
+        buttonModifiarP.setBounds(390, 390, 240, 23);
+
+        jLabel15.setText("Id");
+        PanelModificarP.add(jLabel15);
+        jLabel15.setBounds(270, 40, 10, 16);
+
+        txtIdPM.setText("Ingrese el id del pago a modificar");
+        txtIdPM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdPMActionPerformed(evt);
+            }
+        });
+        PanelModificarP.add(txtIdPM);
+        txtIdPM.setBounds(340, 40, 200, 22);
+
+        buttonBuscarPM.setText("Buscar");
+        PanelModificarP.add(buttonBuscarPM);
+        buttonBuscarPM.setBounds(570, 40, 200, 23);
+
         PanelPrincipal.add(PanelModificarP, "card15");
+
+        PanelEliminarP.setLayout(null);
+
+        jLabel16.setText("Ingrese el id del pago a eliminar");
+        PanelEliminarP.add(jLabel16);
+        jLabel16.setBounds(200, 100, 180, 30);
+
+        txtIdPE.setText("id");
+        PanelEliminarP.add(txtIdPE);
+        txtIdPE.setBounds(390, 110, 71, 22);
+
+        buttonBuscarPE.setText("Eliminar");
+        PanelEliminarP.add(buttonBuscarPE);
+        buttonBuscarPE.setBounds(490, 110, 160, 23);
+
         PanelPrincipal.add(PanelEliminarP, "card16");
         PanelPrincipal.add(PanelInmuebles, "card17");
         PanelPrincipal.add(PanelGuardarI, "card18");
@@ -374,6 +555,10 @@ public class FrmMenuBar extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void txtIdPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdPMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdPMActionPerformed
 
 
     /**
@@ -406,11 +591,43 @@ public class FrmMenuBar extends javax.swing.JFrame {
     public javax.swing.JPanel PanelUsuarios;
     private javax.swing.JPanel PanerBuscar;
     public javax.swing.JButton btnGuardar;
+    public javax.swing.JToggleButton buttonBuscarP;
+    public javax.swing.JToggleButton buttonBuscarPE;
+    public javax.swing.JToggleButton buttonBuscarPM;
+    public javax.swing.JToggleButton buttonCrearPG;
+    public javax.swing.JToggleButton buttonModifiarP;
+    public javax.swing.JComboBox<String> comboTipoPG;
+    public javax.swing.JComboBox<String> comboTipoPM;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuBar mbMenuBar;
+    public javax.swing.JTable tablaP;
+    public javax.swing.JTextField txtBuscarP;
+    public javax.swing.JTextField txtCedulaPG;
+    public javax.swing.JTextField txtCedulaPM;
+    public javax.swing.JTextField txtDescripcionPG;
+    public javax.swing.JTextField txtDescripcionPM;
+    public javax.swing.JTextField txtFechaPG;
+    public javax.swing.JTextField txtFechaPM;
+    public javax.swing.JTextField txtIdPE;
+    public javax.swing.JTextField txtIdPM;
+    public javax.swing.JTextField txtMontoPG;
+    public javax.swing.JTextField txtMontoPM;
     // End of variables declaration//GEN-END:variables
  // Declaración de los menús
     public javax.swing.JMenu jMenuUsuario;

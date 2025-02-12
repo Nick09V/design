@@ -97,6 +97,10 @@ public class CtrPagos implements ActionListener{
             String tipo = (String) frmConP.comboTipoPM.getSelectedItem();
             p.setTipo(tipo);
             if(pagodb.actualizar(p,frmConP.txtIdPM.getText())){
+               frmConP.txtCedulaPM.setText("");
+               frmConP.txtMontoPM.setText("");
+               frmConP.txtFechaPM.setText("");
+               frmConP.txtDescripcionPM.setText("");
                JOptionPane.showMessageDialog(frmConP, "Se actualizo el pago");
                frmConP.buttonModifiarP.setVisible(false);
                frmConP.txtIdPM.setEditable(true);

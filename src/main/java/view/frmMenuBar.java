@@ -188,6 +188,12 @@ public class FrmMenuBar extends javax.swing.JFrame {
         jMenuPagos.add(jMenuIPModificar);
         jMenuPagos.add(jMenuIPEliminar);
         
+        //desabilitar paneles
+        PanelPagosEfectivo.setVisible(false);
+        PanelPagosTarjeta.setVisible(false);
+        txtCodigoTransferencia.setVisible(false);
+        lblCodigoTransferencia.setVisible(false);
+        
         //Inmuebles
         jMenuInmuebles.addActionListener((ActionEvent e) -> {
             cambiarPanel("Inmuebles");
@@ -276,6 +282,7 @@ public class FrmMenuBar extends javax.swing.JFrame {
         PanelGuardarP = new javax.swing.JPanel();
         txtCedulaPG = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        PanelPagosEfectivo = new javax.swing.JPanel();
         txtMontoPG = new javax.swing.JTextField();
         txtFechaPG = new javax.swing.JTextField();
         comboTipoPG = new javax.swing.JComboBox<>();
@@ -285,6 +292,21 @@ public class FrmMenuBar extends javax.swing.JFrame {
         txtDescripcionPG = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         buttonCrearPG = new javax.swing.JToggleButton();
+        lblCodigoTransferencia = new javax.swing.JLabel();
+        txtCodigoTransferencia = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        cmbMetodoPago = new javax.swing.JComboBox<>();
+        PanelPagosTarjeta = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        txtNumeroTarjeta = new javax.swing.JTextField();
+        txtFechaCaducidad = new javax.swing.JTextField();
+        txtCvv = new javax.swing.JTextField();
+        txtTitularTarjeta = new javax.swing.JTextField();
+        btnValidar = new javax.swing.JButton();
         PanelBuscarP = new javax.swing.JPanel();
         txtBuscarP = new javax.swing.JTextField();
         buttonBuscarP = new javax.swing.JToggleButton();
@@ -392,47 +414,157 @@ public class FrmMenuBar extends javax.swing.JFrame {
         PanelPrincipal.add(PanelEliminarT, "card11");
         PanelPrincipal.add(PanelPagos, "card12");
 
-        PanelGuardarP.setLayout(null);
-        PanelGuardarP.add(txtCedulaPG);
-        txtCedulaPG.setBounds(340, 70, 430, 22);
-
         jLabel5.setText("Cedula");
-        PanelGuardarP.add(jLabel5);
-        jLabel5.setBounds(270, 70, 60, 30);
-        PanelGuardarP.add(txtMontoPG);
-        txtMontoPG.setBounds(350, 120, 110, 22);
+
+        PanelPagosEfectivo.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro del Pago"));
+        PanelPagosEfectivo.setToolTipText("");
+        PanelPagosEfectivo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelPagosEfectivo.add(txtMontoPG, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 110, -1));
 
         txtFechaPG.setText("AAAA-MM-DD");
-        PanelGuardarP.add(txtFechaPG);
-        txtFechaPG.setBounds(350, 170, 100, 22);
+        PanelPagosEfectivo.add(txtFechaPG, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 100, -1));
 
         comboTipoPG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pago", "multa" }));
-        PanelGuardarP.add(comboTipoPG);
-        comboTipoPG.setBounds(350, 210, 72, 22);
+        PanelPagosEfectivo.add(comboTipoPG, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, -1));
 
         jLabel6.setText("Monto");
-        PanelGuardarP.add(jLabel6);
-        jLabel6.setBounds(270, 120, 60, 16);
+        PanelPagosEfectivo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 60, -1));
 
         jLabel7.setText("Fecha");
-        PanelGuardarP.add(jLabel7);
-        jLabel7.setBounds(270, 170, 60, 16);
+        PanelPagosEfectivo.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 60, -1));
 
         jLabel8.setText("Tipo");
-        PanelGuardarP.add(jLabel8);
-        jLabel8.setBounds(270, 210, 50, 16);
+        PanelPagosEfectivo.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 50, -1));
 
         txtDescripcionPG.setText("Ingrese la descripcion");
-        PanelGuardarP.add(txtDescripcionPG);
-        txtDescripcionPG.setBounds(340, 260, 440, 90);
+        PanelPagosEfectivo.add(txtDescripcionPG, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 440, 90));
 
         jLabel9.setText("Descripcion");
-        PanelGuardarP.add(jLabel9);
-        jLabel9.setBounds(260, 290, 70, 16);
+        PanelPagosEfectivo.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 70, -1));
 
         buttonCrearPG.setText("Crear pago");
-        PanelGuardarP.add(buttonCrearPG);
-        buttonCrearPG.setBounds(440, 410, 200, 23);
+        buttonCrearPG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCrearPGActionPerformed(evt);
+            }
+        });
+        PanelPagosEfectivo.add(buttonCrearPG, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 200, -1));
+
+        lblCodigoTransferencia.setText("Codito Transferencia");
+        PanelPagosEfectivo.add(lblCodigoTransferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        PanelPagosEfectivo.add(txtCodigoTransferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 150, -1));
+
+        jLabel17.setText("Método de Pago");
+
+        cmbMetodoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tarjeta de crédito", "Transferencia Bancaria", "Efectivo" }));
+        cmbMetodoPago.setSelectedIndex(-1);
+        cmbMetodoPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMetodoPagoActionPerformed(evt);
+            }
+        });
+
+        PanelPagosTarjeta.setBorder(javax.swing.BorderFactory.createTitledBorder("Validar tarjeta"));
+        PanelPagosTarjeta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel18.setText("FORMULARIO PAGO CON TARJETA");
+        PanelPagosTarjeta.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 200, -1));
+
+        jLabel19.setText("NÚMERO DE LA TARJETA");
+        PanelPagosTarjeta.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+
+        jLabel20.setText("FECHA DE CADUCIDAD");
+        PanelPagosTarjeta.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 130, -1));
+
+        jLabel21.setText("TITULAR DE LA TARJETA");
+        PanelPagosTarjeta.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 130, 30));
+
+        jLabel22.setText("CVV");
+        PanelPagosTarjeta.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 30, -1));
+
+        txtNumeroTarjeta.setText("XXXXXXXXXXXXXXXX");
+        txtNumeroTarjeta.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNumeroTarjetaFocusGained(evt);
+            }
+        });
+        PanelPagosTarjeta.add(txtNumeroTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 210, -1));
+
+        txtFechaCaducidad.setText("MM/AA");
+        txtFechaCaducidad.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFechaCaducidadFocusGained(evt);
+            }
+        });
+        PanelPagosTarjeta.add(txtFechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 100, -1));
+
+        txtCvv.setText("XXX");
+        txtCvv.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCvvFocusGained(evt);
+            }
+        });
+        PanelPagosTarjeta.add(txtCvv, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, -1, -1));
+
+        txtTitularTarjeta.setText("NOMBRE APELLIDO");
+        txtTitularTarjeta.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtTitularTarjetaFocusGained(evt);
+            }
+        });
+        PanelPagosTarjeta.add(txtTitularTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 210, 30));
+
+        btnValidar.setText("Validar");
+        btnValidar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValidarActionPerformed(evt);
+            }
+        });
+        PanelPagosTarjeta.add(btnValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, 30));
+
+        javax.swing.GroupLayout PanelGuardarPLayout = new javax.swing.GroupLayout(PanelGuardarP);
+        PanelGuardarP.setLayout(PanelGuardarPLayout);
+        PanelGuardarPLayout.setHorizontalGroup(
+            PanelGuardarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelGuardarPLayout.createSequentialGroup()
+                .addGroup(PanelGuardarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelGuardarPLayout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(PanelPagosEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(PanelPagosTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelGuardarPLayout.createSequentialGroup()
+                        .addGap(270, 270, 270)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtCedulaPG, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelGuardarPLayout.createSequentialGroup()
+                        .addGap(220, 220, 220)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(cmbMetodoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(131, Short.MAX_VALUE))
+        );
+        PanelGuardarPLayout.setVerticalGroup(
+            PanelGuardarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelGuardarPLayout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addGroup(PanelGuardarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCedulaPG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(PanelGuardarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(cmbMetodoPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(PanelGuardarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelGuardarPLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(PanelPagosEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelGuardarPLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(PanelPagosTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(47, Short.MAX_VALUE))
+        );
 
         PanelPrincipal.add(PanelGuardarP, "card13");
 
@@ -560,6 +692,38 @@ public class FrmMenuBar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdPMActionPerformed
 
+    private void buttonCrearPGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCrearPGActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonCrearPGActionPerformed
+
+    private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnValidarActionPerformed
+
+    private void cmbMetodoPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMetodoPagoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbMetodoPagoActionPerformed
+
+    private void txtNumeroTarjetaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroTarjetaFocusGained
+        // TODO add your handling code here:
+        txtNumeroTarjeta.setText("");
+    }//GEN-LAST:event_txtNumeroTarjetaFocusGained
+
+    private void txtFechaCaducidadFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFechaCaducidadFocusGained
+        // TODO add your handling code here:
+        txtFechaCaducidad.setText("");
+    }//GEN-LAST:event_txtFechaCaducidadFocusGained
+
+    private void txtCvvFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCvvFocusGained
+        // TODO add your handling code here:
+        txtCvv.setText("");
+    }//GEN-LAST:event_txtCvvFocusGained
+
+    private void txtTitularTarjetaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTitularTarjetaFocusGained
+        // TODO add your handling code here:
+        txtTitularTarjeta.setText("");
+    }//GEN-LAST:event_txtTitularTarjetaFocusGained
+
 
     /**
      * @param args the command line arguments
@@ -586,16 +750,20 @@ public class FrmMenuBar extends javax.swing.JFrame {
     private javax.swing.JPanel PanelModificarP;
     private javax.swing.JPanel PanelModificarT;
     private javax.swing.JPanel PanelPagos;
+    public javax.swing.JPanel PanelPagosEfectivo;
+    public javax.swing.JPanel PanelPagosTarjeta;
     public javax.swing.JPanel PanelPrincipal;
     private javax.swing.JPanel PanelTelecomunicaciones;
     public javax.swing.JPanel PanelUsuarios;
     private javax.swing.JPanel PanerBuscar;
     public javax.swing.JButton btnGuardar;
+    public javax.swing.JButton btnValidar;
     public javax.swing.JToggleButton buttonBuscarP;
     public javax.swing.JToggleButton buttonBuscarPE;
     public javax.swing.JToggleButton buttonBuscarPM;
     public javax.swing.JToggleButton buttonCrearPG;
     public javax.swing.JToggleButton buttonModifiarP;
+    public javax.swing.JComboBox<String> cmbMetodoPago;
     public javax.swing.JComboBox<String> comboTipoPG;
     public javax.swing.JComboBox<String> comboTipoPM;
     private javax.swing.JLabel jLabel1;
@@ -606,7 +774,13 @@ public class FrmMenuBar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -615,19 +789,25 @@ public class FrmMenuBar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JLabel lblCodigoTransferencia;
     private javax.swing.JMenuBar mbMenuBar;
     public javax.swing.JTable tablaP;
     public javax.swing.JTextField txtBuscarP;
     public javax.swing.JTextField txtCedulaPG;
     public javax.swing.JTextField txtCedulaPM;
+    public javax.swing.JTextField txtCodigoTransferencia;
+    public javax.swing.JTextField txtCvv;
     public javax.swing.JTextField txtDescripcionPG;
     public javax.swing.JTextField txtDescripcionPM;
+    public javax.swing.JTextField txtFechaCaducidad;
     public javax.swing.JTextField txtFechaPG;
     public javax.swing.JTextField txtFechaPM;
     public javax.swing.JTextField txtIdPE;
     public javax.swing.JTextField txtIdPM;
     public javax.swing.JTextField txtMontoPG;
     public javax.swing.JTextField txtMontoPM;
+    public javax.swing.JTextField txtNumeroTarjeta;
+    public javax.swing.JTextField txtTitularTarjeta;
     // End of variables declaration//GEN-END:variables
  // Declaración de los menús
     public javax.swing.JMenu jMenuUsuario;
